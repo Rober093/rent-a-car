@@ -158,14 +158,18 @@
                                                 </div>
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group mb-24">
-                                                        <input type="date" class="form-control" id="date" name="Recoger" required placeholder="Recoger">
+                                                        <label for="date" style="color: black; margin: 1rem" >Withdrawal Date</label>
+                                                        <input type="date" class="form-control" id="date" name="Recoger" required placeholder="Recoger" min="<?php echo date('Y-m-d'); ?>">
                                                     </div>
                                                 </div>
+
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group mb-24">
-                                                        <input type="date" class="form-control" id="date2" name="Entregar" required placeholder="Entregar">
+                                                        <label for="date2" style="color: black; margin: 1rem">Drop-off Date</label>
+                                                        <input type="date" class="form-control" id="date2" name="Entregar" required placeholder="Entregar" min="<?php echo date('Y-m-d'); ?>">
                                                     </div>
                                                 </div>
+
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <textarea class="form-control" required name="message" placeholder="Your Message"></textarea>
@@ -208,42 +212,42 @@
             <!-- booking total Area end -->
 
                 <!-- footer Area start -->
-                <footer class="footer pt-50">
-                    <div class="container">
-                        <div class="footer-logo">
-                            <a href="./index.html">
-                                <img src="assets/media/logo2.png" alt="">
-                            </a>
-                        </div>
-                        <div class="detail-blog">
-                            <div class="row align-items-xxl-end align-items-center">
-                                <div class="col-xxl-5 col-xl-6">
-                                    <div class="footer-detail">
-                                        <div class="contact-detail">
-                                            <a href=""> <i class="fal fa-phone-alt"></i> +503 7000 3794</a>
-                                            <a href=""> <i class="fal fa-envelope"></i> rentacarelsalvadorsv@gmail.com</a>
-                                            <a href=""> <i class="fal fa-map-marker-alt"></i>Aeropuerto <br> de El Salvador Monseñor Romero, San Luis Talpa CP 1601</a>
-                                        </div>
-                                        <p class="light-text">Monday - Friday: <b>08:00 AM - 06:00 PM</b></p>
-                                        <ul class="social-link list-unstyled">
-                                            <li><a href="https://www.instagram.com/rent.acarelsalvador/"><i class="fab fa-instagram"></i></a></li>
-                                            <li><a href="https://www.facebook.com/rentacarelsalvador1/"><i class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href=""><i class="fal fa-envelope"></i></a></li>
-                                        </ul>
-                                        <div class="copuright-text">
-                                            <p>©2023 All rights are reserved by <a href="https://www.webdesing.lat/">WEB DESING</a></p>
-                                        </div>
+            <footer class="footer pt-50">
+                <div class="container">
+                    <div class="footer-logo">
+                        <a href="./index.html">
+                            <img src="assets/media/logo2.png" alt="">
+                        </a>
+                    </div>
+                    <div class="detail-blog">
+                        <div class="row align-items-xxl-end align-items-center">
+                            <div class="col-xxl-5 col-xl-6">
+                                <div class="footer-detail">
+                                    <div class="contact-detail">
+                                        <a href=""> <i class="fal fa-phone-alt"></i> +503 7000 3794</a>
+                                        <a href=""> <i class="fal fa-envelope"></i> rentacarelsalvadorsv@gmail.com</a>
+                                        <a href=""> <i class="fal fa-map-marker-alt"></i>Aeropuerto <br> de El Salvador Monseñor Romero, San Luis Talpa CP 1601</a>
+                                    </div>
+                                    <p class="light-text">Monday - Friday: <b>08:00 AM - 06:00 PM</b></p>
+                                    <ul class="social-link list-unstyled">
+                                        <li><a href="https://www.instagram.com/rent.acarelsalvador/"><i class="fab fa-instagram"></i></a></li>
+                                        <li><a href="https://www.facebook.com/rentacarelsalvador1/"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href=""><i class="fal fa-envelope"></i></a></li>
+                                    </ul>
+                                    <div class="copuright-text">
+                                        <p>©2023 All rights are reserved by <a href="https://www.webdesing.lat/">WEB DESING</a></p>
                                     </div>
                                 </div>
-                                <div class="col-xxl-7 col-xl-6">
-                                    <div class="showcase-img d-xl-block d-none">
-                                        <img src="/assets/media/bg/car-image.png" alt="">
-                                    </div>
+                            </div>
+                            <div class="col-xxl-7 col-xl-6">
+                                <div class="showcase-img d-xl-block d-none">
+                                    <img src="/assets/media/bg/car-image.png" alt="">
                                 </div>
                             </div>
                         </div>
                     </div>
-                </footer>
+                </div>
+            </footer>
                 <!-- footer Area end -->
         </div>
             <!-- Jquery Js -->
