@@ -183,7 +183,7 @@
                             <div class="detail-block">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form method="post" action="./index.html" class="contact-form mb-24 mb-xl-0">
+                                        <form id="contact-form" method="POST" action="https://formspree.io/f/mdovqdod">
                                             <div class="row">
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group mb-24">
@@ -220,6 +220,10 @@
                                                         <textarea class="form-control" required name="message" placeholder="Your Message"></textarea>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <br>
+                                            <div class="text-center">
+                                                <button type="submit" class="dark-btn w-100">Send Message</button>
                                             </div>
                                             <div id="message" class="alert-msg"></div>
                                         </form>

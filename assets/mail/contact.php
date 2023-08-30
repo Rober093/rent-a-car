@@ -34,7 +34,7 @@ else if(trim($comments) == '') {
 // Enter the email address that you want to emails to be sent to.
 // Example $address = "joe.doe@yourdomain.com";
 
-$address = $email;
+$address = "rober_cordova93@hotmail.com";
 
 
 // Configuration option.
@@ -71,3 +71,55 @@ if(mail($address, $e_subject, $msg, $headers)) {
 	echo 'ERROR!';
 
 }
+
+
+/*
+<?php
+
+if (!empty($_POST)) {
+    $name = sanitizeInput($_POST['name']);
+    $email = sanitizeInput($_POST['email']);
+    $comments = sanitizeInput($_POST['message']);
+
+    if (empty($name)) {
+        echo '<div class="alert alert-error">You must enter your name.</div>';
+        exit();
+    } else if (empty($email)) {
+        echo '<div class="alert alert-error">You must enter email address.</div>';
+        exit();
+    } else if (!isEmail($email)) {
+        echo '<div class="alert alert-error">You must enter a valid email address.</div>';
+        exit();
+    } else if (empty($comments)) {
+        echo '<div class="alert alert-error">You must enter your comments</div>';
+        exit();
+    }
+
+    $address = "tendocorp@gmail.com";
+    $e_subject = 'Contact Form';
+    $e_body = "You have been contacted by $name, their additional message is as follows." . PHP_EOL . PHP_EOL;
+    $e_content = "\"$comments\"" . PHP_EOL . PHP_EOL;
+    $e_reply = "You can contact $name via email, $email";
+    $msg = wordwrap($e_body . $e_content . $e_reply, 70);
+    $headers = "From: Infinity\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+    if (mail($address, $e_subject, $msg, $headers)) {
+        $data['status'] = 200;
+        $data['success'] = true;
+        echo json_encode($data);
+    } else {
+        echo 'ERROR!';
+    }
+}
+
+function sanitizeInput($input) {
+    return trim(htmlspecialchars($input, ENT_QUOTES, 'UTF-8'));
+}
+
+function isEmail($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+?>
+*/
