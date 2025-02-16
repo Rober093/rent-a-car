@@ -129,6 +129,8 @@
             <br>
 
             <!-- booking total Area start -->
+            <!-- star contact form -->
+
             <div class="booking-total pb-100">
                 <div class="container">
                     <div class="row">
@@ -136,7 +138,7 @@
                             <div class="detail-block">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form id="contact-form" method="POST" action="https://formspree.io/f/xknlbgln">
+                                        <form id="contact-form" method="POST" action="https://submit-form.com/p1aRKfBeV">
                                             <div class="row">
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group mb-24">
@@ -145,7 +147,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group mb-24">
-                                                        <input type="text" class="form-control" id="last_name" name="last name" required placeholder="Last name">
+                                                        <input type="text" class="form-control" id="last_name" name="last_name" required placeholder="Last Name">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-12">
@@ -155,7 +157,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group mb-24">
-                                                        <select class="form-control" id="Vehicle" name="Vehicle Categorie" required>
+                                                        <select class="form-control" id="vehicle_category" name="vehicle_category" required>
                                                             <option value="" disabled selected>Select Vehicle Category</option>
                                                             <option value="Sedan">Sedan</option>
                                                             <option value="SUV Two Rows">SUV Two Rows</option>
@@ -174,21 +176,21 @@
                                                 </div>
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group mb-24">
-                                                        <label for="date" style="color: black; margin: 1rem" >Withdrawal Date</label>
-                                                        <input type="date" class="form-control" id="date" name="Recoger" required placeholder="Recoger" min="<?php echo date('Y-m-d'); ?>">
+                                                        <label for="pickup_date" style="color: black; margin: 1rem">Withdrawal Date</label>
+                                                        <input type="date" class="form-control" id="pickup_date" name="pickup_date" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group mb-24">
-                                                        <label for="date2" style="color: black; margin: 1rem">Drop-off Date</label>
-                                                        <input type="date" class="form-control" id="date2" name="Entregar" required placeholder="Entregar" min="<?php echo date('Y-m-d'); ?>">
+                                                        <label for="dropoff_date" style="color: black; margin: 1rem">Drop-off Date</label>
+                                                        <input type="date" class="form-control" id="dropoff_date" name="dropoff_date" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <textarea class="form-control" required name="message" placeholder="Your Message"></textarea>
+                                                        <textarea class="form-control" required name="message" id="message" placeholder="Your Message"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -196,9 +198,88 @@
                                             <div class="text-center">
                                                 <button type="submit" class="dark-btn w-100">RESERVE NOW</button>
                                             </div>
-                                            <div id="message" class="alert-msg"></div>
                                         </form>
+
                                     </div>
+
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            // Obtener el formulario
+                                            const form = document.getElementById("contact-form");
+
+                                            // Configurar la fecha mínima en los campos de fecha
+                                            const today = new Date().toISOString().split("T")[0];
+                                            document.getElementById("pickup_date").setAttribute("min", today);
+                                            document.getElementById("dropoff_date").setAttribute("min", today);
+
+                                            // Validación y envío
+                                            form.addEventListener("submit", function (event) {
+                                                event.preventDefault(); // Evita el envío por defecto para validar
+
+                                                // Obtener los valores del formulario
+                                                const name = document.getElementById("name").value.trim();
+                                                const lastName = document.getElementById("last_name").value.trim();
+                                                const email = document.getElementById("email").value.trim();
+                                                const phone = document.getElementById("phone").value.trim();
+                                                const pickupDate = document.getElementById("pickup_date").value;
+                                                const dropoffDate = document.getElementById("dropoff_date").value;
+                                                const message = document.getElementById("message").value.trim();
+
+                                                // Validaciones básicas
+                                                if (!name || !lastName || !email || !phone || !pickupDate || !dropoffDate) {
+                                                    alert("Please fill in all required fields.");
+                                                    return;
+                                                }
+
+                                                // Validación de fecha (drop-off debe ser después del pickup)
+                                                if (dropoffDate < pickupDate) {
+                                                    alert("Drop-off date cannot be before the withdrawal date.");
+                                                    return;
+                                                }
+
+                                                // Crear un objeto con los datos del formulario
+                                                const formData = {
+                                                    name: name,
+                                                    last_name: lastName,
+                                                    email: email,
+                                                    phone: phone,
+                                                    pickup_date: pickupDate,
+                                                    dropoff_date: dropoffDate,
+                                                    message: message,
+                                                };
+
+                                                // Enviar los datos al endpoint usando fetch
+                                                fetch("https://submit-form.com/p1aRKfBeV", {
+                                                    method: "POST",
+                                                    headers: {
+                                                        "Content-Type": "application/json",
+                                                        Accept: "application/json",
+                                                    },
+                                                    body: JSON.stringify(formData), // Convierte el objeto a JSON
+                                                })
+                                                    .then((response) => {
+                                                        if (response.ok) {
+                                                            return response.json(); // Parsea la respuesta JSON
+                                                        } else {
+                                                            throw new Error("Error al enviar el formulario");
+                                                        }
+                                                    })
+                                                    .then((data) => {
+                                                        // Muestra un mensaje de éxito
+                                                        alert("¡Mensaje enviado correctamente!");
+                                                        form.reset(); // Limpia el formulario
+                                                    })
+                                                    .catch((error) => {
+                                                        // Muestra un mensaje de error
+                                                        alert("Hubo un error al enviar el mensaje. Inténtalo de nuevo.");
+                                                        console.error("Error:", error);
+                                                    });
+                                            });
+                                        });
+                                    </script>
+
+                                    <!--end contact area -->
+
                                     <br>
                                     <div class="col-lg-6">
                                         <div class="total-area">
@@ -264,7 +345,50 @@
                     </div>
                 </div>
             </footer>
-                <!-- footer Area end -->
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Obtener el formulario
+                    const form = document.getElementById("contact-form");
+
+                    // Configurar la fecha mínima en los campos de fecha
+                    const today = new Date().toISOString().split("T")[0];
+                    document.getElementById("pickup_date").setAttribute("min", today);
+                    document.getElementById("dropoff_date").setAttribute("min", today);
+
+                    // Validación y envío
+                    form.addEventListener("submit", function (event) {
+                        event.preventDefault(); // Evita el envío por defecto para validar
+
+                        // Obtener los valores del formulario
+                        const name = document.getElementById("name").value.trim();
+                        const lastName = document.getElementById("last_name").value.trim();
+                        const email = document.getElementById("email").value.trim();
+                        const phone = document.getElementById("phone").value.trim();
+                        const pickupDate = document.getElementById("pickup_date").value;
+                        const dropoffDate = document.getElementById("dropoff_date").value;
+                        const message = document.getElementById("message").value.trim();
+
+                        // Validaciones básicas
+                        if (!name || !lastName || !email || !phone || !pickupDate || !dropoffDate) {
+                            alert("Please fill in all required fields.");
+                            return;
+                        }
+
+                        // Validación de fecha (drop-off debe ser después del pickup)
+                        if (dropoffDate < pickupDate) {
+                            alert("Drop-off date cannot be before the withdrawal date.");
+                            return;
+                        }
+
+                        // Si pasa la validación, enviar el formulario
+                        form.submit();
+                    });
+                });
+            </script>
+
+
+            <!-- footer Area end -->
         </div>
             <!-- Jquery Js -->
             <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>

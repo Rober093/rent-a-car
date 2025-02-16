@@ -135,31 +135,31 @@
                             <div class="contact-block mb-xxl-0 mb-24">
                                 <h2>Let's Connect, Reach Out to Rentacar EL Salvador</h2>
                                 <p>Have a question, need assistance, or ready to make a reservation? We're here to help. Use the contact information or fill out the form below to get in touch with Rentacar El salvador.</p>
-                                <form id="contact-form" method="POST" action="https://formspree.io/f/xknlbgln">
+                                <form id="contact-form" method="POST">
                                     <div class="row">
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group mb-24">
-                                                <input type="text" class="form-control" id="name" name="name" required placeholder="Your Name">
+                                                <input type="text" class="form-control" id="name" name="name" required placeholder="Your Name" />
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group mb-24">
-                                                <input type="email" class="form-control" id="email" name="email" required placeholder="Email">
+                                                <input type="email" class="form-control" id="email" name="email" required placeholder="Email" />
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group mb-24">
-                                                <input type="text" class="form-control" id="topic" name="topic" required placeholder="Your Topic">
+                                                <input type="text" class="form-control" id="topic" name="topic" required placeholder="Your Topic" />
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group mb-24">
-                                                <input type="tel" class="form-control" id="phone" name="phone" required placeholder="Your Phone">
+                                                <input type="tel" class="form-control" id="phone" name="phone" required placeholder="Your Phone" />
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group mb-48">
-                                                <textarea class="form-control" required name="message" placeholder="Your Message"></textarea>
+                                                <textarea class="form-control" id="message" name="message" required placeholder="Your Message"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -168,6 +168,7 @@
                                     </div>
                                     <div id="message" class="alert-msg"></div>
                                 </form>
+
                             </div>
                         </div>
                         <div class="col-xxl-7 col-12">
@@ -207,6 +208,71 @@
                     </div>
                 </div>
             </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Obtener el formulario
+                    const form = document.getElementById("contact-form");
+                    const messageDiv = document.getElementById("message");
+
+                    // Validación y envío
+                    form.addEventListener("submit", function (event) {
+                        event.preventDefault(); // Evita el envío por defecto para validar
+
+                        // Obtener los valores del formulario
+                        const name = document.getElementById("name").value.trim();
+                        const email = document.getElementById("email").value.trim();
+                        const topic = document.getElementById("topic").value.trim();
+                        const phone = document.getElementById("phone").value.trim();
+                        const message = document.getElementById("message").value.trim();
+
+                        // Validaciones básicas
+                        if (!name || !email || !topic || !phone || !message) {
+                            alert("Please fill in all required fields.");
+                            return;
+                        }
+
+                        // Crear un objeto con los datos del formulario
+                        const formData = {
+                            name: name,
+                            email: email,
+                            topic: topic,
+                            phone: phone,
+                            message: message,
+                        };
+
+                        // Enviar los datos al endpoint usando fetch
+                        fetch("https://submit-form.com/p1aRKfBeV", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Accept: "application/json",
+                            },
+                            body: JSON.stringify(formData), // Convierte el objeto a JSON
+                        })
+                            .then((response) => {
+                                if (response.ok) {
+                                    return response.json(); // Parsea la respuesta JSON
+                                } else {
+                                    throw new Error("Error al enviar el formulario");
+                                }
+                            })
+                            .then((data) => {
+                                // Muestra un mensaje de éxito
+                                messageDiv.innerHTML = "¡Mensaje enviado correctamente!";
+                                messageDiv.style.color = "green";
+                                form.reset(); // Limpia el formulario
+                            })
+                            .catch((error) => {
+                                // Muestra un mensaje de error
+                                messageDiv.innerHTML = "Hubo un error al enviar el mensaje. Inténtalo de nuevo.";
+                                messageDiv.style.color = "red";
+                                console.error("Error:", error);
+                            });
+                    });
+                });
+            </script>
+
             <!-- contact Area end -->
 
             <!-- footer Area start -->
