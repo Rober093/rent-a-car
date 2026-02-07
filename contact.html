@@ -135,7 +135,7 @@
                             <div class="contact-block mb-xxl-0 mb-24">
                                 <h2>Let's Connect, Reach Out to Rentacar EL Salvador</h2>
                                 <p>Have a question, need assistance, or ready to make a reservation? We're here to help. Use the contact information or fill out the form below to get in touch with Rentacar El salvador.</p>
-                                <form id="contact-form" method="POST" action="https://formspree.io/f/xknlbgln">
+                                <form id="contact-form" method="POST" action="https://submit-form.com/p1aRKfBeV">
                                     <div class="row">
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group mb-24">
@@ -259,6 +259,41 @@
             <script src="assets/js/vendor/jquery-validator.js"></script>
             <!-- Site Scripts -->
             <script src="assets/js/app.js"></script>
+
+        <script>
+            document.getElementById("contact-form").addEventListener("submit", async function(e) {
+                e.preventDefault();
+
+                const form = e.target;
+                const messageDiv = document.getElementById("message");
+
+                const formData = new FormData(form);
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    });
+
+                    if (response.ok) {
+                        messageDiv.innerHTML = "✅ Message sent successfully!";
+                        messageDiv.style.color = "green";
+                        form.reset();
+                    } else {
+                        messageDiv.innerHTML = "❌ Error sending message. Try again.";
+                        messageDiv.style.color = "red";
+                    }
+                } catch (error) {
+                    messageDiv.innerHTML = "❌ Connection error.";
+                    messageDiv.style.color = "red";
+                }
+            });
+        </script>
+
+
     </body>
 
 </html>

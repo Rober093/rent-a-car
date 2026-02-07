@@ -8,7 +8,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-VDCQP13VF4');
   </script>
   <meta charset="UTF-8">
@@ -30,6 +29,101 @@
   <link rel="stylesheet" href="assets/css/vendor/slick-theme.css">
   <link rel="stylesheet" href="assets/css/vendor/sal.css">
   <link rel="stylesheet" href="assets/css/app.css">
+
+  <style>
+    /* ===== Rental Requirements Styles ===== */
+    .rental-requirements {
+      background: #f9f9f9;
+      padding: 30px;
+      border-radius: 10px;
+      margin-top: 25px;
+      color: #000;
+    }
+
+    .rental-requirements h5 {
+      color: #000;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .rental-requirements p {
+      color: #000;
+      margin-bottom: 20px;
+    }
+
+    .requirements-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .requirements-list li {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 15px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #000;
+    }
+
+    .requirements-list i {
+      color: #c9a24d;
+      font-size: 18px;
+      margin-top: 4px;
+      min-width: 20px;
+    }
+
+    .requirements-list small {
+      display: block;
+      color: #000;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    /* Mejoras para el formulario */
+    .form-group {
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .required-field::after {
+      content: " *";
+      color: #dc3545;
+    }
+
+    /* Feedback de validación */
+    .is-valid {
+      border-color: #28a745 !important;
+    }
+
+    .is-invalid {
+      border-color: #dc3545 !important;
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 0.875rem;
+      margin-top: 5px;
+      display: none;
+    }
+
+    /* Estilos para el mensaje de éxito */
+    .alert-success {
+      display: none;
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+      color: #155724;
+      padding: 12px 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 
 <body>
@@ -37,11 +131,11 @@
 <div id="preloader">
   <div class="loader">
     <svg class="wheel" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 254.532 254.532" xml:space="preserve">
-                    <g>
-                        <path id="tire" d="M127.267,0C57.092,0,0,57.091,0,127.266s57.092,127.266,127.267,127.266c70.174,0,127.266-57.091,127.266-127.266
+      <g>
+        <path id="tire" d="M127.267,0C57.092,0,0,57.091,0,127.266s57.092,127.266,127.267,127.266c70.174,0,127.266-57.091,127.266-127.266
                             S197.44,0,127.267,0z M127.267,217.656c-49.922,0-90.391-40.468-90.391-90.39s40.469-90.39,90.391-90.39
                             c49.92,0,90.39,40.468,90.39,90.39S177.186,217.656,127.267,217.656z"></path>
-                      <path id="rim" d="M127.267,48.578c-43.39,0-78.689,35.299-78.689,78.688c0,43.389,35.3,78.688,78.689,78.688
+        <path id="rim" d="M127.267,48.578c-43.39,0-78.689,35.299-78.689,78.688c0,43.389,35.3,78.688,78.689,78.688
                             c43.389,0,78.688-35.299,78.688-78.688C205.955,83.877,170.655,48.578,127.267,48.578z M195.878,122.249h-38.18
                             c-0.78-4.825-2.686-9.275-5.435-13.079l26.954-26.954C188.679,93.112,194.771,106.996,195.878,122.249z M132.204,58.648
                             c15.244,1.087,29.123,7.156,40.025,16.591l-26.948,26.949c-3.804-2.748-8.253-4.653-13.077-5.433V58.648z M122.329,58.648v38.106
@@ -59,8 +153,8 @@
                             c-1.821,1.114-3.82,1.956-5.951,2.474v-0.072c-1.586,0.385-3.233,0.612-4.938,0.612S123.915,147.845,122.329,147.459z
                             M132.204,195.884v-38.267c4.824-0.78,9.273-2.685,13.077-5.433l27.034,27.034C161.4,188.696,147.488,194.794,132.204,195.884z
                             M179.292,172.23l-27.028-27.028c2.749-3.804,4.654-8.254,5.435-13.079h38.191C194.818,147.398,188.745,161.308,179.292,172.23z"></path>
-                    </g>
-                </svg>
+      </g>
+    </svg>
     <div class="road"></div>
   </div>
 </div>
@@ -135,27 +229,46 @@
           <div class="detail-block">
             <div class="row">
               <div class="col-lg-6">
-                <form id="contact-form" method="POST" action="https://formspree.io/f/xknlbgln">
+                <!-- Mensaje de éxito (inicialmente oculto) -->
+                <div class="alert-success" id="success-message">
+                  <strong>¡Reserva enviada exitosamente!</strong> Te contactaremos pronto.
+                </div>
+
+                <form id="contact-form" method="POST" action="https://submit-form.com/p1aRKfBeV">
                   <div class="row">
+                    <!-- Nombre -->
                     <div class="col-lg-6 col-12">
                       <div class="form-group mb-24">
-                        <input type="text" class="form-control" id="name" name="name" required placeholder="Your Name">
+                        <label for="name" class="form-label required-field">Your Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="Enter your name">
+                        <div class="error-message" id="name-error">Please enter your name</div>
                       </div>
                     </div>
+
+                    <!-- Apellido -->
                     <div class="col-lg-6 col-12">
                       <div class="form-group mb-24">
-                        <input type="text" class="form-control" id="last_name" name="last name" required placeholder="Last name">
+                        <label for="last_name" class="form-label required-field">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" required placeholder="Enter your last name">
+                        <div class="error-message" id="last-name-error">Please enter your last name</div>
                       </div>
                     </div>
+
+                    <!-- Teléfono -->
                     <div class="col-lg-6 col-12">
                       <div class="form-group mb-24">
-                        <input type="tel" class="form-control" id="phone" name="phone" required placeholder="Your Phone">
+                        <label for="phone" class="form-label required-field">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required placeholder="Enter your phone number">
+                        <div class="error-message" id="phone-error">Please enter a valid phone number</div>
                       </div>
                     </div>
+
+                    <!-- Categoría de vehículo -->
                     <div class="col-lg-6 col-12">
                       <div class="form-group mb-24">
-                        <select class="form-control" id="Vehicle" name="Vehicle Categorie" required>
-                          <option value="" disabled selected>Select Vehicle Category</option>
+                        <label for="vehicle_category" class="form-label required-field">Vehicle Category</label>
+                        <select class="form-control" id="vehicle_category" name="vehicle_category" required>
+                          <option value="" disabled selected>Select an option</option>
                           <option value="Sedan">Sedan</option>
                           <option value="SUV Two Rows">SUV Two Rows</option>
                           <option value="SUV Three Rows">SUV Three Rows</option>
@@ -163,39 +276,55 @@
                           <option value="Automatic Pickups">Automatic Pickups</option>
                           <option value="Microbuses">Microbuses</option>
                         </select>
+                        <div class="error-message" id="category-error">Please select a vehicle category</div>
                       </div>
                     </div>
 
+                    <!-- Email -->
                     <div class="col-12">
                       <div class="form-group mb-24">
-                        <input type="email" class="form-control" id="email" name="email" required placeholder="Email">
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-12">
-                      <div class="form-group mb-24">
-                        <label for="date" style="color: black; margin: 1rem" >Withdrawal Date</label>
-                        <input type="date" class="form-control" id="date" name="Recoger" required placeholder="Recoger" min="<?php echo date('Y-m-d'); ?>">
+                        <label for="email" class="form-label required-field">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+                        <div class="error-message" id="email-error">Please enter a valid email address</div>
                       </div>
                     </div>
 
+                    <!-- Fecha de retiro -->
                     <div class="col-lg-6 col-12">
                       <div class="form-group mb-24">
-                        <label for="date2" style="color: black; margin: 1rem">Drop-off Date</label>
-                        <input type="date" class="form-control" id="date2" name="Entregar" required placeholder="Entregar" min="<?php echo date('Y-m-d'); ?>">
+                        <label for="pickup_date" class="form-label required-field">Withdrawal Date</label>
+                        <input type="date" class="form-control" id="pickup_date" name="pickup_date" required>
+                        <div class="error-message" id="pickup-date-error">Please select a valid withdrawal date</div>
                       </div>
                     </div>
 
+                    <!-- Fecha de devolución -->
+                    <div class="col-lg-6 col-12">
+                      <div class="form-group mb-24">
+                        <label for="dropoff_date" class="form-label required-field">Drop-off Date</label>
+                        <input type="date" class="form-control" id="dropoff_date" name="dropoff_date" required>
+                        <div class="error-message" id="dropoff-date-error">Please select a valid drop-off date</div>
+                      </div>
+                    </div>
+
+                    <!-- Mensaje -->
                     <div class="col-12">
-                      <div class="form-group">
-                        <textarea class="form-control" required name="message" placeholder="Your Message"></textarea>
+                      <div class="form-group mb-24">
+                        <label for="message" class="form-label">Additional Message (Optional)</label>
+                        <textarea class="form-control" name="message" id="message" rows="4" placeholder="Any additional information or special requests..."></textarea>
                       </div>
                     </div>
                   </div>
-                  <br>
-                  <div class="text-center">
-                    <button type="submit" class="dark-btn w-100">RESERVE NOW</button>
+
+                  <!-- Botón de envío -->
+                  <div class="text-center mt-4">
+                    <button type="submit" class="dark-btn w-100" id="submit-btn">
+                      <span id="btn-text">RESERVE NOW</span>
+                      <div class="spinner-border spinner-border-sm text-light d-none" id="loading-spinner" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </button>
                   </div>
-                  <div id="message" class="alert-msg"></div>
                 </form>
               </div>
               <br>
@@ -230,57 +359,6 @@
                 </div>
               </div>
 
-              <style>
-                /* ===== Rental Requirements Styles ===== */
-                .rental-requirements {
-                  background: #f9f9f9;
-                  padding: 30px;
-                  border-radius: 10px;
-                  margin-top: 25px;
-                  color: #000;
-                }
-
-                .rental-requirements h5 {
-                  color: #000;
-                  margin-bottom: 15px;
-                  font-weight: 600;
-                }
-
-                .rental-requirements p {
-                  color: #000;
-                  margin-bottom: 20px;
-                }
-
-                .requirements-list {
-                  list-style: none;
-                  padding: 0;
-                  margin: 0;
-                }
-
-                .requirements-list li {
-                  display: flex;
-                  gap: 12px;
-                  margin-bottom: 15px;
-                  font-size: 15px;
-                  line-height: 1.6;
-                  color: #000;
-                }
-
-                .requirements-list i {
-                  color: #c9a24d;
-                  font-size: 18px;
-                  margin-top: 4px;
-                  min-width: 20px;
-                }
-
-                .requirements-list small {
-                  display: block;
-                  color: #000;
-                  font-size: 13px;
-                  margin-top: 4px;
-                }
-              </style>
-
               <!-- RENTAL REQUIREMENTS -->
               <div class="col-12">
                 <div class="rental-requirements">
@@ -296,7 +374,7 @@
                     </li>
                     <li>
                       <i class="fas fa-id-card"></i>
-                      <span>Valid driver’s license</span>
+                      <span>Valid driver's license</span>
                     </li>
                     <li>
                       <i class="fas fa-plane"></i>
@@ -305,26 +383,24 @@
                     <li>
                       <i class="fas fa-money-bill-wave"></i>
                       <span>
-                                            A <strong>$50 advance payment</strong> is required. Payment may be made via
-                                            Banco Agrícola deposit or with <strong>VISA / MASTERCARD</strong>.
-                                            <small>Non-refundable in case of cancellation.</small>
-                                        </span>
+                        A <strong>$50 advance payment</strong> is required. Payment may be made via
+                        Banco Agrícola deposit or with <strong>VISA / MASTERCARD</strong>.
+                        <small>Non-refundable in case of cancellation.</small>
+                      </span>
                     </li>
                     <li>
                       <i class="fas fa-credit-card"></i>
                       <span>
-                                            A credit or debit card is required for the <strong>security deposit</strong>.
-                                            The deposit may also be made in cash or via bank transfer.
-                                            <small>
-                                                The deposit will be fully refunded upon vehicle return, provided everything is in proper condition.
-                                            </small>
-                                        </span>
+                        A credit or debit card is required for the <strong>security deposit</strong>.
+                        The deposit may also be made in cash or via bank transfer.
+                        <small>
+                          The deposit will be fully refunded upon vehicle return, provided everything is in proper condition.
+                        </small>
+                      </span>
                     </li>
                   </ul>
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>
@@ -332,9 +408,8 @@
     </div>
   </div>
 
-
+  <!-- Slider de autos -->
   <div class="card-slider">
-
     <div class="item-list">
       <img src="./assets/media/car-image/Isuzu-D-Max.avif" alt="">
       <div class="detail-block">
@@ -361,7 +436,6 @@
           <p>Rating</p>
           <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
         </div>
-        <!--   <a href="./booking.html#contact-form" class="dark-btn w-100">Reserve sedan</a> -->
       </div>
     </div>
 
@@ -451,12 +525,10 @@
         </div>
       </div>
     </div>
-
     <!-- MORE ITEMS-->
   </div>
 
   <br>
-
 
   <!-- footer Area start -->
   <footer class="footer pt-50">
@@ -496,8 +568,8 @@
     </div>
   </footer>
   <!-- footer Area end -->
-
 </div>
+
 <!-- Jquery Js -->
 <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
@@ -508,6 +580,283 @@
 <script src="assets/js/vendor/jquery-validator.js"></script>
 <!-- Site Scripts -->
 <script src="assets/js/app.js"></script>
-</body>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Referencias a elementos del DOM
+    const form = document.getElementById("contact-form");
+    const successMessage = document.getElementById("success-message");
+    const submitBtn = document.getElementById("submit-btn");
+    const btnText = document.getElementById("btn-text");
+    const loadingSpinner = document.getElementById("loading-spinner");
+
+    // Configurar fechas mínimas
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("pickup_date").min = today;
+    document.getElementById("dropoff_date").min = today;
+
+    // Elementos de entrada
+    const nameInput = document.getElementById("name");
+    const lastNameInput = document.getElementById("last_name");
+    const emailInput = document.getElementById("email");
+    const phoneInput = document.getElementById("phone");
+    const pickupDateInput = document.getElementById("pickup_date");
+    const dropoffDateInput = document.getElementById("dropoff_date");
+    const categoryInput = document.getElementById("vehicle_category");
+
+    // Event listeners para validación en tiempo real
+    nameInput.addEventListener('blur', validateName);
+    lastNameInput.addEventListener('blur', validateLastName);
+    emailInput.addEventListener('blur', validateEmail);
+    phoneInput.addEventListener('blur', validatePhone);
+    pickupDateInput.addEventListener('change', validatePickupDate);
+    dropoffDateInput.addEventListener('change', validateDropoffDate);
+    categoryInput.addEventListener('change', validateCategory);
+
+    // Cuando cambia la fecha de retiro, actualizar la fecha mínima de devolución
+    pickupDateInput.addEventListener('change', function() {
+      dropoffDateInput.min = this.value;
+      if (dropoffDateInput.value && dropoffDateInput.value < this.value) {
+        showError('dropoff-date-error', 'Drop-off date cannot be before withdrawal date');
+      } else {
+        hideError('dropoff-date-error');
+      }
+    });
+
+    // Validar fecha de devolución
+    dropoffDateInput.addEventListener('change', function() {
+      if (this.value < pickupDateInput.value) {
+        showError('dropoff-date-error', 'Drop-off date cannot be before withdrawal date');
+      } else {
+        hideError('dropoff-date-error');
+      }
+    });
+
+    // Función para validar el formulario completo
+    function validateForm() {
+      let isValid = true;
+
+      // Validar cada campo
+      if (!validateName()) isValid = false;
+      if (!validateLastName()) isValid = false;
+      if (!validateEmail()) isValid = false;
+      if (!validatePhone()) isValid = false;
+      if (!validatePickupDate()) isValid = false;
+      if (!validateDropoffDate()) isValid = false;
+      if (!validateCategory()) isValid = false;
+
+      return isValid;
+    }
+
+    // Funciones de validación individuales
+    function validateName() {
+      const value = nameInput.value.trim();
+      if (!value) {
+        showError('name-error', 'Please enter your name');
+        return false;
+      } else if (value.length < 2) {
+        showError('name-error', 'Name must be at least 2 characters');
+        return false;
+      } else {
+        hideError('name-error');
+        return true;
+      }
+    }
+
+    function validateLastName() {
+      const value = lastNameInput.value.trim();
+      if (!value) {
+        showError('last-name-error', 'Please enter your last name');
+        return false;
+      } else if (value.length < 2) {
+        showError('last-name-error', 'Last name must be at least 2 characters');
+        return false;
+      } else {
+        hideError('last-name-error');
+        return true;
+      }
+    }
+
+    function validateEmail() {
+      const value = emailInput.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!value) {
+        showError('email-error', 'Please enter your email address');
+        return false;
+      } else if (!emailRegex.test(value)) {
+        showError('email-error', 'Please enter a valid email address');
+        return false;
+      } else {
+        hideError('email-error');
+        return true;
+      }
+    }
+
+    function validatePhone() {
+      const value = phoneInput.value.trim();
+      const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,}$/;
+
+      if (!value) {
+        showError('phone-error', 'Please enter your phone number');
+        return false;
+      } else if (!phoneRegex.test(value.replace(/\s/g, ''))) {
+        showError('phone-error', 'Please enter a valid phone number');
+        return false;
+      } else {
+        hideError('phone-error');
+        return true;
+      }
+    }
+
+    function validatePickupDate() {
+      const value = pickupDateInput.value;
+      if (!value) {
+        showError('pickup-date-error', 'Please select a withdrawal date');
+        return false;
+      } else {
+        hideError('pickup-date-error');
+        return true;
+      }
+    }
+
+    function validateDropoffDate() {
+      const value = dropoffDateInput.value;
+      if (!value) {
+        showError('dropoff-date-error', 'Please select a drop-off date');
+        return false;
+      } else if (value < pickupDateInput.value) {
+        showError('dropoff-date-error', 'Drop-off date cannot be before withdrawal date');
+        return false;
+      } else {
+        hideError('dropoff-date-error');
+        return true;
+      }
+    }
+
+    function validateCategory() {
+      const value = categoryInput.value;
+      if (!value) {
+        showError('category-error', 'Please select a vehicle category');
+        return false;
+      } else {
+        hideError('category-error');
+        return true;
+      }
+    }
+
+    // Funciones auxiliares para mostrar/ocultar errores
+    function showError(elementId, message) {
+      const errorElement = document.getElementById(elementId);
+      errorElement.textContent = message;
+      errorElement.style.display = 'block';
+      const inputElement = errorElement.previousElementSibling;
+      inputElement.classList.remove('is-valid');
+      inputElement.classList.add('is-invalid');
+    }
+
+    function hideError(elementId) {
+      const errorElement = document.getElementById(elementId);
+      errorElement.style.display = 'none';
+      const inputElement = errorElement.previousElementSibling;
+      inputElement.classList.remove('is-invalid');
+      inputElement.classList.add('is-valid');
+    }
+
+    // Manejar el envío del formulario
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      // Validar el formulario
+      if (!validateForm()) {
+        // Scroll al primer error
+        const firstError = document.querySelector('.error-message[style*="display: block"]');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+      }
+
+      // Deshabilitar el botón y mostrar spinner
+      submitBtn.disabled = true;
+      btnText.textContent = "PROCESSING...";
+      loadingSpinner.classList.remove("d-none");
+
+      try {
+        // Recopilar datos del formulario
+        const formData = {
+          name: nameInput.value.trim(),
+          last_name: lastNameInput.value.trim(),
+          email: emailInput.value.trim(),
+          phone: phoneInput.value.trim(),
+          vehicle_category: categoryInput.value,
+          pickup_date: pickupDateInput.value,
+          dropoff_date: dropoffDateInput.value,
+          message: document.getElementById("message").value.trim(),
+          submitted_at: new Date().toISOString(),
+          page_url: window.location.href,
+          page_type: "Automatic Pickups"
+        };
+
+        // Enviar datos (cambié el endpoint al mismo que los otros formularios)
+        const response = await fetch("https://submit-form.com/p1aRKfBeV", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          // Mostrar mensaje de éxito
+          successMessage.style.display = 'block';
+          successMessage.scrollIntoView({ behavior: 'smooth' });
+
+          // Resetear formulario
+          form.reset();
+
+          // Resetear clases de validación
+          document.querySelectorAll('.form-control').forEach(input => {
+            input.classList.remove('is-valid', 'is-invalid');
+          });
+
+          // Resetear fechas mínimas
+          pickupDateInput.min = today;
+          dropoffDateInput.min = today;
+
+          // Ocultar mensaje después de 5 segundos
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+          }, 5000);
+
+        } else {
+          throw new Error("Network response was not ok");
+        }
+
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        alert("There was an error submitting your reservation. Please try again or contact us directly.");
+      } finally {
+        // Restaurar botón
+        submitBtn.disabled = false;
+        btnText.textContent = "RESERVE NOW";
+        loadingSpinner.classList.add("d-none");
+      }
+    });
+
+    // Limpiar mensajes de error al escribir
+    const inputs = form.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+      input.addEventListener('input', function() {
+        const errorId = this.id + '-error';
+        const errorElement = document.getElementById(errorId);
+        if (errorElement && errorElement.style.display !== 'none') {
+          hideError(errorId);
+        }
+      });
+    });
+  });
+</script>
+</body>
 </html>
